@@ -5,22 +5,29 @@
 
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
+    <link href="css/angular-busy.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
-        <h2><a href="#">My Favourite Sites Management</a></h2>
-        <hr />
+        <h2><a href="#"><span class="btn btn-primary btn-block"> Favourite Sites Management</span></a></h2>
+
         <div ng-view></div>
 
-        <center>By: <strong><a href="#">PhuongNM4</a></strong></center>
+        <footer class="col-md-12">
+            <center>By: <a href="#"><strong>PhuongNM4</strong></a></center>
+        </footer>
     </div>
+
     <!--scrip section-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular-route.min.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
+    <script src="js/angular-animate.js"></script>
+    <script src="js/angular-busy.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,5 +1,21 @@
-﻿
-angular.module('project', ['ngRoute', 'firebase'])
+﻿//angular.module('app', ['ngAnimate', 'cgBusy', 'firebase']);
+
+//angular.module('app').controller('DemoCtrl', function ($scope, $http, $firebase) {
+
+//    var peopleRef = new Firebase("https://fdn-phuongnm4.firebaseio.com/");
+//    $scope.messages = $firebase(peopleRef);
+
+//    $scope.promise = $http.get('https://fdn-phuongnm4.firebaseio.com/');
+
+//    $scope.demo = function () {
+//        $scope.promise = $http.get('https://fdn-phuongnm4.firebaseio.com/');
+//    };
+//});
+
+
+
+
+angular.module('project', ['ngRoute', 'firebase', 'cgBusy', 'ngAnimate'])
 
 .value('fbURL', 'https://fdn-freestore.firebaseio.com/Projects/')
 
@@ -27,8 +43,28 @@ angular.module('project', ['ngRoute', 'firebase'])
 })
 
     //ListController
-.controller('ListController', function ($scope, Projects) {
+.controller('ListController', function ($scope, Projects, $http) {
+    angular.element(document).ready(function () {
+        var offset = 200;
+        var duration = 300;
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > offset) {
+                $('.back-to-top').fadeIn(duration);
+            } else {
+                $('.back-to-top').fadeOut(duration);
+            }
+        });
+
+        jQuery('.back-to-top').click(function (event) {
+            event.preventDefault();
+            jQuery('html, body').animate({ scrollTop: 0 }, duration);
+            return false;
+        })
+    });
+
     $scope.projects = Projects;
+    $scope.promise = $http.get('https://fdn-freestore.firebaseio.com/Projects/');
 })
 //CreateController
 .controller('CreateController', function ($scope, $location, $timeout, Projects) {
@@ -43,11 +79,12 @@ angular.module('project', ['ngRoute', 'firebase'])
     };
 })
 //EditController
-.controller('EditController', function ($scope, $location, $timeout, $routeParams, $firebase, fbURL) {
+.controller('EditController', function ($scope, $location, $timeout, $routeParams, $firebase, fbURL, $http) {
     $scope.loading = false;
 
     var _url = fbURL + $routeParams.projectId;
     $scope.project = $firebase(new Firebase(_url));
+    $scope.promise = $http.get(_url);
 
     $scope.destroy = function () {
         $scope.loading = true;

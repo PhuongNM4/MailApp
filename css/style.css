@@ -12,10 +12,6 @@ th, td {
     vertical-align: middle;
 }
 
-tr{
-border-bottom: 1px dotted #ccc;
-}
-
 .input-text {
     padding: .5em 1em;
     margin: 0 1em;
@@ -29,4 +25,11 @@ border-bottom: 1px dotted #ccc;
 
 textarea {
     resize: none;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 2em;
+    right: .5em;
+    display: none;
 }

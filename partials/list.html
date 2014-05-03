@@ -1,21 +1,25 @@
 ﻿
-<table>
-    <tbody>
-        <tr>
-            <td colspan="3">
-                <input type="text" ng-model="search" class="search-query input-text" placeholder="Search">
-                <a href="#/new"><span class="btn btn-warning">Add</span></a>
-            </td>
-        </tr>
-        <tr ng-repeat="project in projects | orderByPriority | filter:search | orderBy:'name'">
-            <td>
-                <a href="#/edit/{{project.$id}}"><span class="btn btn-info">Edit</span></a>
-            </td>
-            <td>
-                <a href="{{project.site}}" target="_blank">{{project.name}}</a>
-            </td>
-            <td>{{project.description}}</td>
 
-        </tr>
-    </tbody>
-</table>
+<div cg-busy="{promise:promise}">
+    <table class="col-md-8 table-striped table-hover">
+        <tbody>
+            <tr ng-repeat="project in projects | orderByPriority | filter:search | orderBy:'name'">
+                <td>
+                    <a href="#/edit/{{project.$id}}"><span class="btn btn-info">Edit</span></a>
+                </td>
+                <td>
+                    <a href="{{project.site}}" target="_blank">{{project.name}}</a>
+                </td>
+                <td>{{project.description}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-4">
+    <input type="text" ng-model="search" class="search-query input-text" placeholder="Search">
+    <a href="#/new"><span class="btn btn-warning">Add</span></a>
+</div>
+
+<div class="back-to-top"><span class="btn btn-info">TOP</span></div>
+
