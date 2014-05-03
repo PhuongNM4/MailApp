@@ -4,10 +4,14 @@
 
 .help-inline {
     color: red;
-    font-size:smaller;
+    font-size: smaller;
 }
 
 th, td {
     padding: .5em 1em;
     vertical-align: top;
+}
+
+.input-text {
+    padding: .5em 1em;
 }

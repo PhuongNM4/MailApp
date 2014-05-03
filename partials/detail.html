@@ -4,7 +4,7 @@
         <tr>
             <td>Name</td>
             <td>
-                <input type="text" name="name" ng-model="project.name" required />
+                <input type="text" name="name" ng-model="project.name" required class="input-text"/>
                 <span ng-show="myForm.name.$error.required && myForm.name.$dirty" class="help-inline">
                     This field is required.
                 </span>
@@ -13,7 +13,7 @@
         <tr>
             <td>Site Url</td>
             <td>
-                <input type="url" name="site" ng-model="project.site" required />
+                <input type="url" name="site" ng-model="project.site" required class="input-text" />
                 <span ng-show="myForm.site.$error.required && myForm.name.$dirty" class="help-inline">
                     This field is required.
                 </span>
@@ -25,7 +25,7 @@
         <tr>
             <td>Description</td>
             <td>
-                <textarea name="description" ng-model="project.description"></textarea>
+                <textarea name="description" ng-model="project.description" class="input-text"></textarea>
             </td>
         </tr>
         <tr>
