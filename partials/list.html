@@ -1,0 +1,24 @@
+﻿
+<table>
+    <thead>
+        <tr>
+            <th>Site Alias</th>
+            <th>Description</th>
+            <th><a href="#/new">Add new</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="project in projects | orderByPriority | filter:search | orderBy:'name'">
+            <td>
+                <a href="{{project.size}}" target="_blank">{{project.name}}</a>
+            </td>
+            <td>{{project.description}}</td>
+            <td>
+                <a href="#/edit/{{project.$id}}">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"><input type="text" ng-model="search" class="search-query" placeholder="Search"></td>
+        </tr>
+    </tbody>
+</table>

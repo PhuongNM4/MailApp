@@ -1,0 +1,39 @@
+﻿
+<form name="myForm">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" name="name" ng-model="project.name" required />
+                <span ng-show="myForm.name.$error.required && myForm.name.$dirty" class="help-inline">
+                    This field is required.
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Site Url</td>
+            <td>
+                <input type="url" name="site" ng-model="project.site" required />
+                <span ng-show="myForm.site.$error.required && myForm.name.$dirty" class="help-inline">
+                    This field is required.
+                </span>
+                <span ng-show="myForm.site.$error.url" class="help-inline">
+                    Not a URL
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <textarea name="description" ng-model="project.description"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="#/" class="btn">Cancel</a>
+                <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-primary">Save</button>
+                <button ng-click="destroy()" ng-show="project.$remove" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+    </table>
+</form>

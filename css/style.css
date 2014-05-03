@@ -1,0 +1,12 @@
+﻿body {
+    font-family: Calibri;
+}
+
+.help-inline {
+    color: red;
+}
+
+th, td {
+    padding: .5em 1em;
+    vertical-align: top;
+}
