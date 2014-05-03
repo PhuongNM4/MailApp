@@ -9,9 +9,24 @@
 
 th, td {
     padding: .5em 1em;
-    vertical-align: top;
+    vertical-align: middle;
+}
+
+tr{
+border-bottom: 1px dotted #ccc;
 }
 
 .input-text {
     padding: .5em 1em;
+    margin: 0 1em;
+}
+
+.img-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+textarea {
+    resize: none;
 }

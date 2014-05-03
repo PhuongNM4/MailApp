@@ -4,14 +4,16 @@
         <tr>
             <td>Name</td>
             <td>
-                <input type="text" name="name" ng-model="project.name" required class="input-text"/>
+                <input type="text" name="name" ng-model="project.name" required class="input-text" />
                 <span ng-show="myForm.name.$error.required && myForm.name.$dirty" class="help-inline">
                     This field is required.
                 </span>
             </td>
         </tr>
         <tr>
-            <td>Site Url</td>
+            <td>
+                Site Url
+            </td>
             <td>
                 <input type="url" name="site" ng-model="project.site" required class="input-text" />
                 <span ng-show="myForm.site.$error.required && myForm.site.$dirty" class="help-inline">
@@ -20,10 +22,13 @@
                 <span ng-show="myForm.site.$error.url" class="help-inline">
                     Not a URL
                 </span>
+                <a href="{{project.site}}" target="_blank">
+                    <span class="btn btn-info" ng-disabled="myForm.site.$error.url || myForm.site.$error.required">Go</span>
+                </a>
             </td>
         </tr>
         <tr>
-            <td>Description</td>
+            <td>Tags</td>
             <td>
                 <textarea name="description" ng-model="project.description" class="input-text"></textarea>
             </td>
@@ -33,6 +38,7 @@
                 <a href="#/" class="btn">Cancel</a>
                 <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-primary">Save</button>
                 <button ng-click="destroy()" ng-show="project.$remove" class="btn btn-danger">Delete</button>
+                <img ng-show="loading" src="../img/loading.gif" class="img-icon" />
             </td>
         </tr>
     </table>

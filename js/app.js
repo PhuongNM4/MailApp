@@ -30,26 +30,33 @@ angular.module('project', ['ngRoute', 'firebase'])
 .controller('ListController', function ($scope, Projects) {
     $scope.projects = Projects;
 })
-    //CreateController
+//CreateController
 .controller('CreateController', function ($scope, $location, $timeout, Projects) {
+    $scope.loading = false;
     $scope.save = function () {
+        $scope.loading = true;
         Projects.$add($scope.project, function () {
-            $timeout(function () { $location.path('/'); });
-        })
+            $timeout(function () {
+                $location.path('/');
+            });
+        });
     };
 })
-    //EditController
-.controller('EditController', function ($scope, $location, $routeParams, $firebase, fbURL) {
-    var _url = fbURL + $routeParams.projectId;
+//EditController
+.controller('EditController', function ($scope, $location, $timeout, $routeParams, $firebase, fbURL) {
+    $scope.loading = false;
 
+    var _url = fbURL + $routeParams.projectId;
     $scope.project = $firebase(new Firebase(_url));
 
     $scope.destroy = function () {
+        $scope.loading = true;
         $scope.project.$remove();
         $location.path('/');
     };
 
     $scope.save = function () {
+        $scope.loading = true;
         $scope.project.$save();
         $location.path('/');
     };
