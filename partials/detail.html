@@ -14,7 +14,7 @@
             <td>Site Url</td>
             <td>
                 <input type="url" name="site" ng-model="project.site" required class="input-text" />
-                <span ng-show="myForm.site.$error.required && myForm.name.$dirty" class="help-inline">
+                <span ng-show="myForm.site.$error.required && myForm.site.$dirty" class="help-inline">
                     This field is required.
                 </span>
                 <span ng-show="myForm.site.$error.url" class="help-inline">
