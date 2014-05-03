@@ -10,7 +10,7 @@
     <tbody>
         <tr ng-repeat="project in projects | orderByPriority | filter:search | orderBy:'name'">
             <td>
-                <a href="{{project.size}}" target="_blank">{{project.name}}</a>
+                <a href="{{project.site}}" target="_blank">{{project.name}}</a>
             </td>
             <td>{{project.description}}</td>
             <td>
