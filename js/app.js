@@ -88,9 +88,8 @@ angular.module('project', ['ngRoute', 'firebase', 'cgBusy', 'ngAnimate'])
                     return false;
                 })
             });
-
-            $scope.projects = Projects;
             $scope.promise = $http.get('https://fdn-freestore.firebaseio.com/Projects/');
+            $scope.projects = Projects;
         })
         //CreateController
         .controller('CreateController', function ($scope, $location, $timeout, Projects) {
@@ -109,8 +108,8 @@ angular.module('project', ['ngRoute', 'firebase', 'cgBusy', 'ngAnimate'])
             $scope.loading = false;
 
             var _url = fbURL + $routeParams.projectId;
-            $scope.project = $firebase(new Firebase(_url));
             $scope.promise = $http.get(_url);
+            $scope.project = $firebase(new Firebase(_url));
 
             $scope.destroy = function () {
                 $scope.loading = true;
