@@ -208,9 +208,14 @@ angular.module('cgBusy').run(['$templateCache', function ($templateCache) {
     'use strict';
 
     $templateCache.put('angular-busy.html',
-      "<div class='custom-loader'>" +
+      "<div class='cg-busy-default-wrapper'>" +
+      "<div class='cg-busy-default-sign'>" +
+      "<div class='cg-busy-default-spinner'>" +
       "<img src='https://raw.githubusercontent.com/PhuongNM4/MailApp/gh-pages/img/loader.gif'/>" +
+      "<span>Loading...</span>" +
+      "</div>" +
+      "</div>" +
       "</div>"
-    ); 
+    );
 
 }]);
