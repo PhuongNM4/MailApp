@@ -16,7 +16,7 @@
             <td>
                 <a href="{{project.site}}" target="_blank">{{project.name}}</a>
             </td>
-            <td>{{project.description}}</td>
+            <td bind-html-unsafe="project.description | spitTags"></td>
 
         </tr>
     </tbody>

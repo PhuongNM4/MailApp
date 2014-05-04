@@ -41,61 +41,87 @@ angular.module('project', ['ngRoute', 'firebase', 'cgBusy', 'ngAnimate'])
         redirectTo: '/'
     })
 })
-
-    //ListController
-.controller('ListController', function ($scope, Projects, $http) {
-    angular.element(document).ready(function () {
-        var offset = 200;
-        var duration = 300;
-
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > offset) {
-                $('.back-to-top').fadeIn(duration);
-            } else {
-                $('.back-to-top').fadeOut(duration);
+    .filter('spitTags', function () {
+        return function (input) {
+            var arrStr = input.split(',');
+            var returnStr = "";
+            for (var i = 0; i < arrStr.length; i++) {
+                returnStr = returnStr + '<code>' + arrStr[i] + '</code>';
             }
-        });
+            return returnStr;
+        };
+    })
+    .directive('bindHtmlUnsafe', function ($compile) {
+        return function ($scope, $element, $attrs) {
+            var compile = function (newHTML) { // Create re-useable compile function
+                newHTML = $compile(newHTML)($scope); // Compile html
+                $element.html('').append(newHTML); // Clear and append it
+            };
 
-        jQuery('.back-to-top').click(function (event) {
-            event.preventDefault();
-            jQuery('html, body').animate({ scrollTop: 0 }, duration);
-            return false;
-        })
-    });
+            var htmlName = $attrs.bindHtmlUnsafe; // Get the name of the variable 
+            // Where the HTML is stored
 
-    $scope.projects = Projects;
-    $scope.promise = $http.get('https://fdn-freestore.firebaseio.com/Projects/');
-})
-//CreateController
-.controller('CreateController', function ($scope, $location, $timeout, Projects) {
-    $scope.loading = false;
-    $scope.save = function () {
-        $scope.loading = true;
-        Projects.$add($scope.project, function () {
-            $timeout(function () {
-                $location.path('/');
+            $scope.$watch(htmlName, function (newHTML) { // Watch for changes to 
+                // the HTML
+                if (!newHTML) return;
+                compile(newHTML);   // Compile it
             });
+        };
+    })
+        //ListController
+        .controller('ListController', function ($scope, Projects, $http) {
+            angular.element(document).ready(function () {
+                var offset = 200;
+                var duration = 300;
+
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > offset) {
+                        $('.back-to-top').fadeIn(duration);
+                    } else {
+                        $('.back-to-top').fadeOut(duration);
+                    }
+                });
+
+                jQuery('.back-to-top').click(function (event) {
+                    event.preventDefault();
+                    jQuery('html, body').animate({ scrollTop: 0 }, duration);
+                    return false;
+                })
+            });
+
+            $scope.projects = Projects;
+            $scope.promise = $http.get('https://fdn-freestore.firebaseio.com/Projects/');
+        })
+        //CreateController
+        .controller('CreateController', function ($scope, $location, $timeout, Projects) {
+            $scope.loading = false;
+            $scope.save = function () {
+                $scope.loading = true;
+                Projects.$add($scope.project, function () {
+                    $timeout(function () {
+                        $location.path('/');
+                    });
+                });
+            };
+        })
+        //EditController
+        .controller('EditController', function ($scope, $location, $timeout, $routeParams, $firebase, fbURL, $http) {
+            $scope.loading = false;
+
+            var _url = fbURL + $routeParams.projectId;
+            $scope.project = $firebase(new Firebase(_url));
+            $scope.promise = $http.get(_url);
+
+            $scope.destroy = function () {
+                $scope.loading = true;
+                $scope.project.$remove();
+                $location.path('/');
+            };
+
+            $scope.save = function () {
+                $scope.loading = true;
+                $scope.project.$save();
+                $location.path('/');
+            };
         });
-    };
-})
-//EditController
-.controller('EditController', function ($scope, $location, $timeout, $routeParams, $firebase, fbURL, $http) {
-    $scope.loading = false;
-
-    var _url = fbURL + $routeParams.projectId;
-    $scope.project = $firebase(new Firebase(_url));
-    $scope.promise = $http.get(_url);
-
-    $scope.destroy = function () {
-        $scope.loading = true;
-        $scope.project.$remove();
-        $location.path('/');
-    };
-
-    $scope.save = function () {
-        $scope.loading = true;
-        $scope.project.$save();
-        $location.path('/');
-    };
-});
 
